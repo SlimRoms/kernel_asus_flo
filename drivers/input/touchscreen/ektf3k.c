@@ -551,7 +551,6 @@ static int elan_ktf3k_ts_get_data(struct i2c_client *client, uint8_t *cmd,
 
 static int elan_ktf3k_ts_read_command(struct i2c_client *client,
 			   u8* cmd, u16 cmd_length, u8 *value, u16 value_length){
-	struct i2c_adapter *adapter = client->adapter;
 	struct i2c_msg msg[1];
 	//__le16 le_addr;
 	int retry = 0;
@@ -563,7 +562,7 @@ static int elan_ktf3k_ts_read_command(struct i2c_client *client,
 
 	for (retry = 0; retry <= ELAN_I2C_RETRY; retry++) {
 		down(&pSem);
-		if (i2c_transfer(adapter, msg, 1) == 1) {
+		if (i2c_transfer(client->adapter, msg, 1) == 1) {
 			up(&pSem);
 			return value_length;
 		}
@@ -578,7 +577,6 @@ static int elan_ktf3k_ts_read_command(struct i2c_client *client,
 
 static int elan_ktf3k_i2c_read_packet(struct i2c_client *client, 
 	u8 *value, u16 value_length){
-	struct i2c_adapter *adapter = client->adapter;
 	struct i2c_msg msg[1];
 	//__le16 le_addr;
 	int retry = 0;
@@ -590,7 +588,7 @@ static int elan_ktf3k_i2c_read_packet(struct i2c_client *client,
 
 	for (retry = 0; retry <= ELAN_I2C_RETRY; retry++) {
 		down(&pSem);
-		if (i2c_transfer(adapter, msg, 1) == 1) {
+		if (i2c_transfer(client->adapter, msg, 1) == 1) {
 			up(&pSem);
 			return value_length;
 		}
