@@ -14,11 +14,15 @@
 #ifndef __MSM_THERMAL_H
 #define __MSM_THERMAL_H
 
+#ifdef CONFIG_BRICKED_THERMAL
 #include <asm/cputime.h>
+#endif
+
 
 struct msm_thermal_data {
 	uint32_t sensor_id;
 	uint32_t poll_ms;
+#ifdef CONFIG_BRICKED_THERMAL
 	uint32_t shutdown_temp;
 
 	uint32_t allowed_max_high;
@@ -42,19 +46,24 @@ struct msm_thermal_stat {
     cputime64_t time_mid;
     cputime64_t time_max;
 };
+#endif
 
 #ifdef CONFIG_THERMAL_MONITOR
 extern int msm_thermal_init(struct msm_thermal_data *pdata);
+#ifndef CONFIG_BRICKED_THERMAL
 extern int msm_thermal_device_init(void);
+#endif
 #else
 static inline int msm_thermal_init(struct msm_thermal_data *pdata)
 {
 	return -ENOSYS;
 }
+#ifndef CONFIG_BRICKED_THERMAL
 static inline int msm_thermal_device_init(void)
 {
 	return -ENOSYS;
 }
+#endif
 #endif
 
 #endif /*__MSM_THERMAL_H*/
