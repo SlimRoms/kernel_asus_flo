@@ -209,7 +209,7 @@ static DEFINE_MUTEX(s2w_lock);
 int dt2w_switch = 1;
 int dt2w_switch_temp = 1;
 int dt2w_changed = 0;
-int s2w_switch = 1;
+int s2w_switch = 0;
 int s2w_switch_temp = 1;
 int s2w_changed = 0;
 int s2w_begin_v = 150;
