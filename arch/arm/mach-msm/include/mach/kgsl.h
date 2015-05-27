@@ -51,6 +51,10 @@ struct kgsl_iommu_ctx {
 	enum kgsl_iommu_context_id ctx_id;
 };
 
+#ifdef CONFIG_CPU_FREQ_GOV_SLIM
+extern int graphics_boost;
+#endif
+
 /*
  * struct kgsl_device_iommu_data - Struct holding iommu context data obtained
  * from dtsi file
