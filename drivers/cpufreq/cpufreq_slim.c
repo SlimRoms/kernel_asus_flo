@@ -48,7 +48,7 @@ static int g_count = 0;
 #define MIN_FREQUENCY_UP_THRESHOLD		(11)
 #define MAX_FREQUENCY_UP_THRESHOLD		(100)
 #define MIN_FREQUENCY_DOWN_DIFFERENTIAL		(1)
-#define UI_DYNAMIC_SAMPLING_RATE		(15000)
+#define UI_DYNAMIC_SAMPLING_RATE		(30000)
 #define INPUT_EVENT_MIN_TIMEOUT			(0)
 #define INPUT_EVENT_MAX_TIMEOUT			(3000)
 #define INPUT_EVENT_TIMEOUT			(1000)
@@ -165,8 +165,8 @@ static struct dbs_tuners {
 	.two_phase_freq = 0,
 	.ui_sampling_rate = UI_DYNAMIC_SAMPLING_RATE,
 	.input_event_timeout = INPUT_EVENT_TIMEOUT,
-	.enable_boost_cpu = 1,
-	.gboost = 1,
+	.enable_boost_cpu = 0,
+	.gboost = 0,
 	.gboost_threshold = DEF_GBOOST_THRESHOLD,
 };
 
@@ -423,7 +423,7 @@ static ssize_t store_input_event_timeout(struct kobject *a, struct attribute *b,
 	return count;
 }
 
-static int two_phase_freq_array[NR_CPUS] = {[0 ... NR_CPUS-1] = 1350000} ;
+static int two_phase_freq_array[NR_CPUS] = {[0 ... NR_CPUS-1] = 1026000} ;
 
 static ssize_t show_two_phase_freq
 (struct kobject *kobj, struct attribute *attr, char *buf)
@@ -460,7 +460,7 @@ static ssize_t store_two_phase_freq(struct kobject *a, struct attribute *b,
 	return count;
 }
 
-static int input_event_min_freq_array[NR_CPUS] = {1350000, 1026000, 1026000, 1026000} ;
+static int input_event_min_freq_array[NR_CPUS] = {918000, 918000, 702000, 594000} ;
 
 static ssize_t show_input_event_min_freq
 (struct kobject *kobj, struct attribute *attr, char *buf)
